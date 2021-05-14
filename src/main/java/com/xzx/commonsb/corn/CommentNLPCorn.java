@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.xzx.commonsb.entity.Comment;
 import com.xzx.commonsb.service.ICommentService;
 import com.xzx.commonsb.util.SentimentAnalysisUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
+@Slf4j
 public class CommentNLPCorn {
 
     @Autowired
@@ -25,7 +27,7 @@ public class CommentNLPCorn {
         if (commentList.size() > 0) {
             for (Comment comment : commentList) {
                 comment.setRes(SentimentAnalysisUtil.getAnalysisRes(comment.getComment(), "3class"));
-                System.out.println(comment.getRes());
+                log.info(comment.getRes());
             }
             commentService.updateBatchById(commentList);
         }

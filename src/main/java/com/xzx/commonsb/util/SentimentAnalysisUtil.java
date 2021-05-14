@@ -6,8 +6,10 @@ import com.tencentcloudapi.common.profile.HttpProfile;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
 
 import com.tencentcloudapi.nlp.v20190408.NlpClient;
-import com.tencentcloudapi.nlp.v20190408.models.*;;
-
+import com.tencentcloudapi.nlp.v20190408.models.*;
+import lombok.extern.slf4j.Slf4j;
+import sun.rmi.runtime.Log;;
+@Slf4j
 public class SentimentAnalysisUtil {
 
     public static String getAnalysisRes(String text, String mode) {
@@ -33,7 +35,7 @@ public class SentimentAnalysisUtil {
 
             res = SentimentAnalysisResponse.toJsonString(resp);
         } catch (TencentCloudSDKException e) {
-            System.out.println(e.toString());
+            log.error(e.toString());
         }
         return res;
     }
