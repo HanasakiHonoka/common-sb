@@ -37,11 +37,11 @@ jobs:
        name: "demo"
        token: ${{ secrets.GITHUB_TOKEN }}
        allowUpdates: true
-#    - name: jar reload
-#      uses: appleboy/ssh-action@master
-#      with:
-#        host: 106.54.68.249
-#        username: root
-#        password: ${{ secrets.PASSWORD }}
-#        port: 22
-#        script: sh /home/com/start2.sh restart
+    - name: jar reload
+      uses: appleboy/ssh-action@master
+      with:
+        host: 106.54.68.249
+        username: root
+        password: ${{ secrets.PASSWORD }}
+        port: 22
+        script: sh /home/com/start2.sh restart
