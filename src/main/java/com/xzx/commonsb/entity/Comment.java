@@ -22,5 +22,11 @@ public class Comment {
     @TableField("`like`")
     private Integer like;
 
-    private String res;
+    @TableField("tx_res_3")
+    private String txRes3;
+    @TableField("tx_res_2")
+    private String txRes2;
+    @TableField("ali_res")
+    private String aliRes;
+
 }

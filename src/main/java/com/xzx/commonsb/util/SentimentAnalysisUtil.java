@@ -12,7 +12,7 @@ import sun.rmi.runtime.Log;;
 @Slf4j
 public class SentimentAnalysisUtil {
 
-    public static String getAnalysisRes(String text, String mode) {
+    public static String getTxAnalysisRes(String text, String mode) {
         String res = null;
 
         try {
@@ -38,6 +38,10 @@ public class SentimentAnalysisUtil {
             log.error(e.toString());
         }
         return res;
+    }
+
+    public static String getAliAnalysisRes(String text) {
+        return null;
     }
 
 
