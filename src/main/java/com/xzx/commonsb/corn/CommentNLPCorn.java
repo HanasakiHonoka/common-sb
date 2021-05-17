@@ -18,7 +18,7 @@ public class CommentNLPCorn {
     @Autowired
     private ICommentService commentService;
 
-    @Scheduled(cron = "0 0/10 * * * ? ")
+    @Scheduled(cron = "0 0/5 * * * ? ")
     public void getNLPRes() {
         QueryWrapper<Comment> queryWrapper = new QueryWrapper<>();
         queryWrapper.isNull("res");
