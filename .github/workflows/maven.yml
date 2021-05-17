@@ -46,8 +46,8 @@ jobs:
         port: 22
         script: sh /home/com/start2.sh restart
     - name: 'Send Message to Wechat'
-        uses: HollowMan6/Wechat-Timed-Message@main
-        with:
-          PPTOKEN: ${{ secrets.PPTOKEN }}
-          TITLE: ${{ github.event.commits[0].author.name }}更新了
-          MSG: ${{ github.event.commits[0].message }}
+      uses: HollowMan6/Wechat-Timed-Message@main
+      with:
+        PPTOKEN: ${{ secrets.PPTOKEN }}
+        TITLE: ${{ github.event.commits[0].author.name }}更新了
+        MSG: ${{ github.event.commits[0].message }}
