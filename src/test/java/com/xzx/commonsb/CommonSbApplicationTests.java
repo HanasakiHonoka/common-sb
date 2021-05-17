@@ -3,6 +3,7 @@ package com.xzx.commonsb;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.xzx.commonsb.corn.CommentNLPCorn;
 import com.xzx.commonsb.entity.Comment;
+import com.xzx.commonsb.mapper.CommentMapper;
 import com.xzx.commonsb.service.ICommentService;
 import com.xzx.commonsb.service.IConfigService;
 import com.xzx.commonsb.util.SentimentAnalysisUtil;
@@ -21,10 +22,18 @@ class CommonSbApplicationTests {
     @Autowired
     private IConfigService configService;
 
+    @Autowired
+    private CommentMapper commentMapper;
+
     @Test
     void contextLoads() {
         System.out.println(commentService.getById(50));
         System.out.println(configService.getById(1));
+    }
+
+    @Test
+    void getCmtRes() {
+        System.out.println(commentMapper.getCommentRes());
     }
 
     @Test
