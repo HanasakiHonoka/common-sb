@@ -88,7 +88,7 @@ class CommonSbApplicationTests {
         //redisUtil.del("3");
         //redisUtil.set("nlpCorn", true);
         AliAccessKeyDTO accessKeyDTO = JSON.parseObject(redisUtil.get("aliKey").toString(), AliAccessKeyDTO.class);
-        System.out.println(accessKeyDTO);
+        System.out.println(SentimentAnalysisUtil.getAliAnalysisRes("你还高", accessKeyDTO.getAccessKeyId(), accessKeyDTO.getSecret()));
     }
 
 
