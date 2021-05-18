@@ -1,5 +1,11 @@
 package com.xzx.commonsb.util;
 
+import com.aliyuncs.DefaultAcsClient;
+import com.aliyuncs.IAcsClient;
+import com.aliyuncs.alinlp.model.v20200629.GetSaChGeneralRequest;
+import com.aliyuncs.alinlp.model.v20200629.GetSaChGeneralResponse;
+import com.aliyuncs.exceptions.ClientException;
+import com.aliyuncs.profile.DefaultProfile;
 import com.tencentcloudapi.common.Credential;
 import com.tencentcloudapi.common.profile.ClientProfile;
 import com.tencentcloudapi.common.profile.HttpProfile;
@@ -41,7 +47,25 @@ public class SentimentAnalysisUtil {
     }
 
     public static String getAliAnalysisRes(String text) {
-        return null;
+        String res = null;
+        DefaultProfile defaultProfile = DefaultProfile.getProfile(
+                "cn-hangzhou",
+                "LTAI5tBtq3HHxR9nhGfopdEY",
+                "uAPXNvRCie3tRGfsIgstJF4fSNn5gf");
+
+
+        IAcsClient client = new DefaultAcsClient(defaultProfile);
+        GetSaChGeneralRequest request = new GetSaChGeneralRequest();
+        request.setSysEndpoint("alinlp.cn-hangzhou.aliyuncs.com");
+        request.setServiceCode("alinlp");
+        request.setText(text);
+        try {
+            GetSaChGeneralResponse response = client.getAcsResponse(request);
+            res = response.getData();
+        } catch (ClientException e) {
+            log.error(e.toString());
+        }
+        return res;
     }
 
 

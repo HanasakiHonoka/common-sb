@@ -6,6 +6,8 @@ spring:
     password: movie@159357
     username: root
     driver-class-name: com.mysql.cj.jdbc.Driver
+scheduling:
+  enable: true
 logging:
   file:
-    name: myLog.log
+    name: /home/com/log/myLog.log
