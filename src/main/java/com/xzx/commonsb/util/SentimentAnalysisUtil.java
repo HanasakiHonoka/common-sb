@@ -18,12 +18,12 @@ import sun.rmi.runtime.Log;;
 @Slf4j
 public class SentimentAnalysisUtil {
 
-    public static String getTxAnalysisRes(String text, String mode) {
+    public static String getTxAnalysisRes(String text, String mode, String secretId, String secretKey) {
         String res = null;
 
         try {
 
-            Credential cred = new Credential("AKIDKn0vHQZn4oHQItMExPaVhbDZcQwB38nC", "MVT8VbRxDDvqVFTQaU7WhdHej7F5h2sS");
+            Credential cred = new Credential(secretId, secretKey);
 
             HttpProfile httpProfile = new HttpProfile();
             httpProfile.setEndpoint("nlp.tencentcloudapi.com");
@@ -46,12 +46,12 @@ public class SentimentAnalysisUtil {
         return res;
     }
 
-    public static String getAliAnalysisRes(String text) {
+    public static String getAliAnalysisRes(String text, String accessKeyId, String secret) {
         String res = null;
         DefaultProfile defaultProfile = DefaultProfile.getProfile(
                 "cn-hangzhou",
-                "",
-                "");
+                accessKeyId,
+                secret);
 
 
         IAcsClient client = new DefaultAcsClient(defaultProfile);

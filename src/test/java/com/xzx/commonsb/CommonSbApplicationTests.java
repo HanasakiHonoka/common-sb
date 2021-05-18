@@ -2,10 +2,12 @@ package com.xzx.commonsb;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.xzx.commonsb.corn.CommentNLPCorn;
+import com.xzx.commonsb.dto.AliAccessKeyDTO;
+import com.xzx.commonsb.dto.TxSecretKeyDTO;
 import com.xzx.commonsb.entity.Comment;
 import com.xzx.commonsb.mapper.CommentMapper;
 import com.xzx.commonsb.service.ICommentService;
-import com.xzx.commonsb.service.IConfigService;
+import com.xzx.commonsb.util.RedisUtil;
 import com.xzx.commonsb.util.SentimentAnalysisUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,15 +29,14 @@ class CommonSbApplicationTests {
     private ICommentService commentService;
 
     @Autowired
-    private IConfigService configService;
+    private CommentMapper commentMapper;
 
     @Autowired
-    private CommentMapper commentMapper;
+    private RedisUtil redisUtil;
 
     @Test
     void contextLoads() {
         System.out.println(commentService.getById(50));
-        System.out.println(configService.getById(1));
     }
 
     @Test
@@ -54,14 +55,14 @@ class CommonSbApplicationTests {
         //}
         //commentService.updateBatchById(commentList);
     }
-
-    @Autowired
-    CommentNLPCorn corn;
-
-    @Test
-    void cornTest() {
-        corn.getNLPRes();
-    }
+    //
+    //@Autowired
+    //CommentNLPCorn corn;
+    //
+    //@Test
+    //void cornTest() {
+    //    corn.getNLPRes();
+    //}
 
     @Test
     void fix() {
@@ -78,6 +79,14 @@ class CommonSbApplicationTests {
         commentService.updateBatchById(fixList);
     }
 
+    @Test
+    void redisTest() {
+        //redisUtil.set("1", "value");
+        //redisUtil.set("2", "value2");
+        //redisUtil.set("3", "value3");
+        //redisUtil.del("3");
+        //redisUtil.set("nlpCorn", true);
+    }
 
 
 
