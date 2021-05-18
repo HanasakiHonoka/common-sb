@@ -64,20 +64,20 @@ class CommonSbApplicationTests {
     //    corn.getNLPRes();
     //}
 
-    @Test
-    void fix() {
-        QueryWrapper<Comment> queryWrapper = new QueryWrapper<>();
-        queryWrapper.orderByAsc("id");
-        queryWrapper.last("limit 1000");
-        List<Comment> fixList = commentService.list(queryWrapper);
-        for (Comment comment : fixList) {
-            String res = null;
-            while ((res = SentimentAnalysisUtil.getTxAnalysisRes(comment.getComment(), "3class")) == null) ;
-            comment.setTxRes3(res);
-            System.out.println(comment);
-        }
-        commentService.updateBatchById(fixList);
-    }
+    //@Test
+    //void fix() {
+    //    QueryWrapper<Comment> queryWrapper = new QueryWrapper<>();
+    //    queryWrapper.orderByAsc("id");
+    //    queryWrapper.last("limit 1000");
+    //    List<Comment> fixList = commentService.list(queryWrapper);
+    //    for (Comment comment : fixList) {
+    //        String res = null;
+    //        while ((res = SentimentAnalysisUtil.getTxAnalysisRes(comment.getComment(), "3class")) == null) ;
+    //        comment.setTxRes3(res);
+    //        System.out.println(comment);
+    //    }
+    //    commentService.updateBatchById(fixList);
+    //}
 
     @Test
     void redisTest() {

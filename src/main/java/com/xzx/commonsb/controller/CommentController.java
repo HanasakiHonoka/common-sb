@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.xzx.commonsb.entity.Comment;
 import com.xzx.commonsb.mapper.CommentMapper;
 import com.xzx.commonsb.service.ICommentService;
+import com.xzx.commonsb.util.RedisUtil;
 import com.xzx.commonsb.vo.CommentVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,10 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class CommentController {
 
     @Autowired
-    ICommentService commentService;
+    private ICommentService commentService;
 
     @Autowired
-    CommentMapper commentMapper;
+    private CommentMapper commentMapper;
+
+    @Autowired
+    private RedisUtil redisUtil;
 
     @GetMapping("/noRes")
     public String getNoRes() {
@@ -29,6 +33,6 @@ public class CommentController {
 
     @PostMapping("/corn")
     public void enableCorn(Boolean enable) {
-
+        redisUtil.set("nlpCorn", enable);
     }
 }
