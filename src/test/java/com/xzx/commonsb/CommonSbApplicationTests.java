@@ -1,5 +1,6 @@
 package com.xzx.commonsb;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.xzx.commonsb.corn.CommentNLPCorn;
 import com.xzx.commonsb.dto.AliAccessKeyDTO;
@@ -86,6 +87,8 @@ class CommonSbApplicationTests {
         //redisUtil.set("3", "value3");
         //redisUtil.del("3");
         //redisUtil.set("nlpCorn", true);
+        AliAccessKeyDTO accessKeyDTO = JSON.parseObject(redisUtil.get("aliKey").toString(), AliAccessKeyDTO.class);
+        System.out.println(accessKeyDTO);
     }
 
 

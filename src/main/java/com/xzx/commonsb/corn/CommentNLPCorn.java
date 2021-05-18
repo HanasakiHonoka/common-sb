@@ -2,6 +2,7 @@ package com.xzx.commonsb.corn;
 
 import cn.hutool.Hutool;
 import cn.hutool.core.util.StrUtil;
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.xzx.commonsb.dto.AliAccessKeyDTO;
 import com.xzx.commonsb.dto.TxSecretKeyDTO;
@@ -35,8 +36,8 @@ public class CommentNLPCorn {
     @Scheduled(cron = "0 0/5 * * * ? ")
     public void getNLPRes() {
         if (!(Boolean) redisUtil.get("nlpCorn")) return;
-        AliAccessKeyDTO accessKeyDTO = (AliAccessKeyDTO) redisUtil.get("aliKey");
-        TxSecretKeyDTO secretKeyDTO = (TxSecretKeyDTO) redisUtil.get("txKey");
+        AliAccessKeyDTO accessKeyDTO = JSON.parseObject(redisUtil.get("aliKey").toString(), AliAccessKeyDTO.class);
+        TxSecretKeyDTO secretKeyDTO = JSON.parseObject(redisUtil.get("txKey").toString(), TxSecretKeyDTO.class);
         QueryWrapper<Comment> queryWrapper = new QueryWrapper<>();
         queryWrapper.or().isNull("tx_res_3").or().isNull("tx_res_2").or().isNull("ali_res");
         queryWrapper.last("limit 1000");
