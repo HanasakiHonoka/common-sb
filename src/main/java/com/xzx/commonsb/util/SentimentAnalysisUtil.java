@@ -50,8 +50,8 @@ public class SentimentAnalysisUtil {
         String res = null;
         DefaultProfile defaultProfile = DefaultProfile.getProfile(
                 "cn-hangzhou",
-                "LTAI5tBtq3HHxR9nhGfopdEY",
-                "uAPXNvRCie3tRGfsIgstJF4fSNn5gf");
+                "",
+                "");
 
 
         IAcsClient client = new DefaultAcsClient(defaultProfile);
