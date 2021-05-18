@@ -47,10 +47,10 @@ public class CommentNLPCorn {
                     if (mode.equals("3class")) {
                         comment.setTxRes3(SentimentAnalysisUtil.getTxAnalysisRes(comment.getComment(), "3class"));
                     } else {
-                        comment.setTxRes3(SentimentAnalysisUtil.getTxAnalysisRes(comment.getComment(), "2class"));
+                        comment.setTxRes2(SentimentAnalysisUtil.getTxAnalysisRes(comment.getComment(), "2class"));
                     }
                 } else {
-                    comment.setTxRes3(SentimentAnalysisUtil.getAliAnalysisRes(comment.getComment()));
+                    comment.setAliRes(SentimentAnalysisUtil.getAliAnalysisRes(comment.getComment()));
                 }
                 log.info(comment.toString());
             }
