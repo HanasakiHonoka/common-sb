@@ -41,14 +41,15 @@ public class CommentNLPCorn {
         QueryWrapper<Comment> queryWrapper = new QueryWrapper<>();
         queryWrapper.or().isNull("tx_res_3").or().isNull("tx_res_2").or().isNull("ali_res");
         queryWrapper.last("limit 1000");
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
         List<Comment> commentList = commentService.list(queryWrapper);
         if (commentList.size() > 0) {
             for (Comment comment : commentList) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 if (StrUtil.isBlank(comment.getTxRes3())) comment.setTxRes3(SentimentAnalysisUtil.getTxAnalysisRes(comment.getComment(), "3class", secretKeyDTO.getSecretId(), secretKeyDTO.getSecretKey()));
                 if (StrUtil.isBlank(comment.getTxRes2())) comment.setTxRes2(SentimentAnalysisUtil.getTxAnalysisRes(comment.getComment(), "2class", secretKeyDTO.getSecretId(), secretKeyDTO.getSecretKey()));
                 if (StrUtil.isBlank(comment.getAliRes())) comment.setAliRes(SentimentAnalysisUtil.getAliAnalysisRes(comment.getComment(), accessKeyDTO.getAccessKeyId(), accessKeyDTO.getSecret()));
