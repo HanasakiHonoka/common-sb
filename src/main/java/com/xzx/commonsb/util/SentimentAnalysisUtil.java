@@ -1,5 +1,6 @@
 package com.xzx.commonsb.util;
 
+import com.alibaba.fastjson.JSON;
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.alinlp.model.v20200629.GetSaChGeneralRequest;
@@ -13,12 +14,25 @@ import com.tencentcloudapi.common.exception.TencentCloudSDKException;
 
 import com.tencentcloudapi.nlp.v20190408.NlpClient;
 import com.tencentcloudapi.nlp.v20190408.models.*;
+import com.xzx.commonsb.dto.AliAccessKeyDTO;
+import com.xzx.commonsb.dto.TxSecretKeyDTO;
 import lombok.extern.slf4j.Slf4j;
-import sun.rmi.runtime.Log;;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 @Slf4j
+@Component
 public class SentimentAnalysisUtil {
 
-    public static String getTxAnalysisRes(String text, String mode, String secretId, String secretKey) {
+    @Autowired
+    private RedisUtil redisUtil;
+
+    public  String getTxAnalysisRes(String text) {
+        TxSecretKeyDTO secretKeyDTO = JSON.parseObject(redisUtil.get("txKey").toString(), TxSecretKeyDTO.class);
+        return getTxAnalysisRes(text, "3class", secretKeyDTO.getSecretId(), secretKeyDTO.getSecretKey());
+    }
+
+    public String getTxAnalysisRes(String text, String mode, String secretId, String secretKey) {
         String res = null;
 
         try {
@@ -46,7 +60,12 @@ public class SentimentAnalysisUtil {
         return res;
     }
 
-    public static String getAliAnalysisRes(String text, String accessKeyId, String secret) {
+    public String getAliAnalysisRes(String text) {
+        AliAccessKeyDTO accessKeyDTO = JSON.parseObject(redisUtil.get("aliKey").toString(), AliAccessKeyDTO.class);
+        return this.getAliAnalysisRes(text, accessKeyDTO.getAccessKeyId(), accessKeyDTO.getSecret());
+    }
+
+    public String getAliAnalysisRes(String text, String accessKeyId, String secret) {
         String res = null;
         DefaultProfile defaultProfile = DefaultProfile.getProfile(
                 "cn-hangzhou",

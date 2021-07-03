@@ -83,12 +83,6 @@ class CommonSbApplicationTests {
     @Test
     void redisTest() {
         //redisUtil.set("1", "value");
-        //redisUtil.set("2", "value2");
-        //redisUtil.set("3", "value3");
-        //redisUtil.del("3");
-        //redisUtil.set("nlpCorn", true);
-        AliAccessKeyDTO accessKeyDTO = JSON.parseObject(redisUtil.get("aliKey").toString(), AliAccessKeyDTO.class);
-        System.out.println(SentimentAnalysisUtil.getAliAnalysisRes("你还高", accessKeyDTO.getAccessKeyId(), accessKeyDTO.getSecret()));
     }
 
 

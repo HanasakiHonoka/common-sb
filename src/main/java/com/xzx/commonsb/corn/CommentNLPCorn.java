@@ -27,6 +27,9 @@ public class CommentNLPCorn {
     private ICommentService commentService;
 
     @Autowired
+    private SentimentAnalysisUtil sentimentAnalysisUtil;
+
+    @Autowired
     private RedisUtil redisUtil;
 
     public CommentNLPCorn() {
@@ -50,9 +53,9 @@ public class CommentNLPCorn {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                if (StrUtil.isBlank(comment.getTxRes3())) comment.setTxRes3(SentimentAnalysisUtil.getTxAnalysisRes(comment.getComment(), "3class", secretKeyDTO.getSecretId(), secretKeyDTO.getSecretKey()));
-                if (StrUtil.isBlank(comment.getTxRes2())) comment.setTxRes2(SentimentAnalysisUtil.getTxAnalysisRes(comment.getComment(), "2class", secretKeyDTO.getSecretId(), secretKeyDTO.getSecretKey()));
-                if (StrUtil.isBlank(comment.getAliRes())) comment.setAliRes(SentimentAnalysisUtil.getAliAnalysisRes(comment.getComment(), accessKeyDTO.getAccessKeyId(), accessKeyDTO.getSecret()));
+                if (StrUtil.isBlank(comment.getTxRes3())) comment.setTxRes3(sentimentAnalysisUtil.getTxAnalysisRes(comment.getComment(), "3class", secretKeyDTO.getSecretId(), secretKeyDTO.getSecretKey()));
+                if (StrUtil.isBlank(comment.getTxRes2())) comment.setTxRes2(sentimentAnalysisUtil.getTxAnalysisRes(comment.getComment(), "2class", secretKeyDTO.getSecretId(), secretKeyDTO.getSecretKey()));
+                if (StrUtil.isBlank(comment.getAliRes())) comment.setAliRes(sentimentAnalysisUtil.getAliAnalysisRes(comment.getComment(), accessKeyDTO.getAccessKeyId(), accessKeyDTO.getSecret()));
                 log.info(comment.toString());
             }
             commentService.updateBatchById(commentList);

@@ -1,10 +1,13 @@
 package com.xzx.commonsb.controller;
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.xzx.commonsb.entity.Comment;
 import com.xzx.commonsb.mapper.CommentMapper;
 import com.xzx.commonsb.service.ICommentService;
 import com.xzx.commonsb.util.RedisUtil;
+import com.xzx.commonsb.util.SentimentAnalysisUtil;
+import com.xzx.commonsb.vo.CommentSentimentVO;
 import com.xzx.commonsb.vo.CommentVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +23,9 @@ public class CommentController {
 
     @Autowired
     private ICommentService commentService;
+
+    @Autowired
+    private SentimentAnalysisUtil sentimentAnalysisUtil;
 
     @Autowired
     private CommentMapper commentMapper;
@@ -46,5 +52,22 @@ public class CommentController {
     @PostMapping("/corn")
     public void enableCorn(Boolean enable) {
         redisUtil.set("nlpCorn", enable);
+    }
+
+    @GetMapping("/single")
+    public CommentSentimentVO getSingleRes(String comment) {
+        CommentSentimentVO res = new CommentSentimentVO();
+        if (StrUtil.isBlank(comment)) return null;
+        String txRes = null;
+        String aliRes = null;
+        while (txRes == null) {
+            txRes = sentimentAnalysisUtil.getTxAnalysisRes(comment);
+        }
+        while (aliRes == null) {
+            aliRes = sentimentAnalysisUtil.getAliAnalysisRes(comment);
+        }
+        res.setTxRes(txRes);
+        res.setAliRes(aliRes);
+        return res;
     }
 }
