@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
+
 @RestController
 @RequestMapping("/comment")
 public class CommentController {
@@ -29,6 +31,16 @@ public class CommentController {
     public String getNoRes() {
         CommentVO commentVO = commentMapper.getCommentRes();
         return String.format("腾讯2class还剩%d, 腾讯3class还剩%d, 阿里还剩%d", commentVO.getTxRes2(), commentVO.getTxRes3(), commentVO.getAliRes());
+    }
+
+    @GetMapping("/test")
+    public String getTest() {
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return LocalDateTime.now().toString();
     }
 
     @PostMapping("/corn")
