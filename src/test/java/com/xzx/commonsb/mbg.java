@@ -46,7 +46,7 @@ public class mbg {
             gc.setOutputDir(projectPath + "/src/main/java");
             gc.setAuthor("xzx");
             gc.setOpen(false);
-            // gc.setSwagger2(true); 实体属性 Swagger2 注解
+            gc.setSwagger2(true); //实体属性 Swagger2 注解
             mpg.setGlobalConfig(gc);
 
             // 数据源配置
@@ -54,8 +54,8 @@ public class mbg {
             dsc.setUrl("jdbc:mysql://106.54.68.249:3326/test_db?useUnicode=true&useSSL=false&characterEncoding=utf8");
             // dsc.setSchemaName("public");
             dsc.setDriverName("com.mysql.cj.jdbc.Driver");
-            dsc.setUsername("root");
-            dsc.setPassword("movie@159357");
+            dsc.setUsername("remote");
+            dsc.setPassword("Zz960518.");
             mpg.setDataSource(dsc);
 
             // 包配置
@@ -113,7 +113,7 @@ public class mbg {
             //指定自定义模板路径，注意不要带上.ftl/.vm, 会根据使用的模板引擎自动识别
             // templateConfig.setEntity("templates/entity2.java");
             // templateConfig.setService();
-            // templateConfig.setController();
+            templateConfig.setController("");
 
             templateConfig.setXml(null);
             mpg.setTemplate(templateConfig);
@@ -131,7 +131,7 @@ public class mbg {
             strategy.setSuperEntityColumns("id");
             strategy.setInclude(scanner("表名，多个英文逗号分割").split(","));
             strategy.setControllerMappingHyphenStyle(true);
-            strategy.setTablePrefix(pc.getModuleName() + "_");
+            strategy.setTablePrefix("t_");
             mpg.setStrategy(strategy);
             mpg.setTemplateEngine(new FreemarkerTemplateEngine());
             mpg.execute();

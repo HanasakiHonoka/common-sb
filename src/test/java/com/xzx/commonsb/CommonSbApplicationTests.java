@@ -8,6 +8,7 @@ import com.xzx.commonsb.dto.TxSecretKeyDTO;
 import com.xzx.commonsb.entity.Comment;
 import com.xzx.commonsb.mapper.CommentMapper;
 import com.xzx.commonsb.service.ICommentService;
+import com.xzx.commonsb.service.IMovieService;
 import com.xzx.commonsb.util.RedisUtil;
 import com.xzx.commonsb.util.SentimentAnalysisUtil;
 import org.junit.jupiter.api.Test;
@@ -34,6 +35,14 @@ class CommonSbApplicationTests {
 
     @Autowired
     private RedisUtil redisUtil;
+
+    @Autowired
+    private IMovieService movieService;
+
+    @Test
+    void movieTest() {
+        System.out.println(movieService.getById(100));
+    }
 
     @Test
     void contextLoads() {
