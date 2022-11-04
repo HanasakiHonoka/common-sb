@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("comment")
+@TableName("ccc")
 public class Comment {
     private static final long serialVersionUID = 1L;
 
@@ -28,5 +28,7 @@ public class Comment {
     private String txRes2;
     @TableField("ali_res")
     private String aliRes;
+
+    private Double score;
 
 }

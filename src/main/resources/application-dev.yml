@@ -2,9 +2,9 @@ server:
   port: 8088
 spring:
   datasource:
-    url: jdbc:mysql://106.54.68.249:3326/test_db?useUnicode=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-    password: Zz960518.
-    username: remote
+    url: jdbc:mysql://127.0.0.1:3306/test_db?useUnicode=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    password: z960518
+    username: root
     driver-class-name: com.mysql.cj.jdbc.Driver
 scheduling:
   enable: false
